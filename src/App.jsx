@@ -8,7 +8,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import AdminPage from './pages/admin'
+
 import { Toaster } from 'react-hot-toast'
+import RegisterPage from './pages/register'
 
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
      <Routes path="/*">
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin/*" element={<AdminPage />} />
         <Route path ="/*" element ={<h1>404 page not found</h1>} />
         

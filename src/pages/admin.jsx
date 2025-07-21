@@ -1,4 +1,5 @@
 import { Link, Route, Routes } from 'react-router-dom'
+import AdminProductPage from './admin/adminProductPage'
 export default function AdminPage() {
     return (
         <div className = " h-screen w-screen flex">
@@ -11,9 +12,9 @@ export default function AdminPage() {
 
                 </div>
 
-            <div className = "h-screen w-[calc(100%-300px)] bg-amber-400">
+            <div className = "h-screen w-[calc(100%-300px)]">
                 <Routes>
-                    <Route path="/products" element={<h1>Products</h1>} />
+                    <Route path="/products" element={<AdminProductPage/>} />
                     <Route path="/users" element={<h1>Users</h1>} />
                     <Route path="/orders" element={<h1>Orders</h1>} />
                 </Routes>
