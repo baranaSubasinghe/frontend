@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { sampleProducts } from '../../assets/sampleData'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export default function AdminProductPage(){
 
@@ -18,7 +19,8 @@ useEffect(() => {
        
     
     return (
-        <div className = "h-full w-full bg-red-400 max-h-full overflow-y-scroll">
+        <div className = "h-full w-full bg-red-400 max-h-full overflow-y-scroll relative">
+            <Link to = "/admin/addProduct" className = "absolute text-xl text-center bottom-5 right-5 bg-green-400 text-white font-bold py-2 px-4 rounded items-center justify-center cursor-pointer">+</Link>
             <table className = "w-full">
                 <thead>
                     <tr>
@@ -40,7 +42,7 @@ useEffect(() => {
                                     <td>{product.labledPrice}</td>
                                     <td>{product.price}</td>
                                     <td>{product.stock}</td>
-                                    <td><img src={product.images[0]} clssName = "w-[100px] h-[50px]"></img></td>
+                                    <td><img src={product.images[0]} className="w-[100px] h-[50px]" /></td>
                                 </tr>
                             )
                         })

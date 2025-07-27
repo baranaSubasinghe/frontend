@@ -36,3 +36,5 @@ function App() {
 }
 
 export default App
+//https://csrouxfjkciufqpqulod.supabase.co
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzcm91eGZqa2NpdWZxcHF1bG9kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzNDU4NzMsImV4cCI6MjA2ODkyMTg3M30.PncKhwrtrOfnqjrXqSpWKJ4DakX6mGBojH1h465HNrA
