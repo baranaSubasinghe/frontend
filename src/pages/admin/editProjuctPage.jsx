@@ -3,32 +3,33 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import mediaUpload from "../../utils/mediaUpload";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
-export default function AddProductPage() {
-    const [productId, setProductId] = useState("")
-    const [name, setName] = useState("")
-    const [altNames, setAltNames] = useState("")
-    const [description, setDescription] = useState("")
+
+
+export default function EditProductPage() {
+    const location = useLocation()
+    const [productId, setProductId] = useState(location.state.productId)
+    const [name, setName] = useState(location.state.name)
+    const [altNames, setAltNames] = useState(location.state.altNames)
+    const [description, setDescription] = useState(location.state.description)
     const [images, setImages] = useState([])
-    const [labledPrice, setLabledPrice] = useState(0)
-    const [price, setPrice] = useState("")
-    const [stock, setStock] = useState("")
+    const [labledPrice, setLabledPrice] = useState(location.state.labledPrice)
+    const [price, setPrice] = useState(location.state.price)
+    const [stock, setStock] = useState(location.state.stock)
     const navigate = useNavigate()
+   
+    console.log(location)
 
-    async function AddProduct(e){
-        
+    async function updateProduct(e){
+
         const token = localStorage.getItem("token")
         if(token==null){
             toast.error("You are not logged in please login first")
             return
         }
-
-    if(images.length<=0){
-        toast.error("please add at least one image")
-        return
-    }
+let imageUrls = Location.state.images;
 
     const promisesArray = []
 
@@ -36,7 +37,9 @@ export default function AddProductPage() {
         promisesArray[i]=mediaUpload(images[i])
     }
     try{
-       const imageUrls = await Promise.all(promisesArray)
+       if(images.length>0){
+        imageUrls = await Promise.all(promisesArray)
+       }
         console.log(imageUrls)
 
         const altNamesArray = altNames.split(",")
@@ -50,7 +53,7 @@ export default function AddProductPage() {
             price : price,
             stock : stock,
         }
-        axios.post(import.meta.env.VITE_BACKEND_URL+"/api/products",product,{
+        axios.put(import.meta.env.VITE_BACKEND_URL+"/api/products/"+productId,product,{
             headers : {
                 Authorization : "Bearer "+token
             }
@@ -68,7 +71,8 @@ export default function AddProductPage() {
     }
     return (
         <div className= " w-full h-full flex flex-col justify-center items-center">
-            <input type="text" placeholder="Product Id" className = "input input-bordered w-full max-w-xs " value={productId} onChange={(e) => setProductId(e.target.value)} />
+            <h1>Edit product page</h1>
+            <input type="text" disabled placeholder="Product Id" className = "input input-bordered w-full max-w-xs " value={productId} onChange={(e) => setProductId(e.target.value)} />
             <input type="text" placeholder="Name" className = "input input-bordered w-full max-w-xs " value={name} onChange={(e) => setName(e.target.value)} />
             <input type="text" placeholder="Alt Names"  className = "input input-bordered w-full max-w-xs " value={altNames} onChange={(e) => setAltNames(e.target.value)} />
             <input type="text" placeholder="Description" className = "input input-bordered w-full max-w-xs " value={description} onChange={(e) => setDescription(e.target.value)} />
@@ -78,7 +82,7 @@ export default function AddProductPage() {
             <input type="number" placeholder="Stock" className = "input input-bordered w-full max-w-xs " value={stock} onChange={(e) => setStock(e.target.value)} />
             <div className ="w-full flex flex-row justify-center mt-4">
                 <Link to = "/admin/products" className = "bg-red-500 text-white font-bold py-2 px-4 rounded mr-4">Cancel</Link>
-                <button  className = "bg-green-500 text-white font-bold py-2 px-4 rounded cursor-pointer" onClick={AddProduct}>Add Product</button>
+                <button  className = "bg-green-500 text-white font-bold py-2 px-4 rounded cursor-pointer" onClick={updateProduct}>Update Product</button>
             </div>
 
         </div>
