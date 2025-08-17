@@ -11,6 +11,7 @@ export default function ProductCard(props) {
                 {props.description}</p>
             <h2>
                 {props.price}
+                
             </h2>
             <button className= "addtoCart">Add to cart</button>
             <button className= "buynow">Buy now</button>
